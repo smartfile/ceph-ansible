@@ -11,12 +11,16 @@
 #     automation scripts to avoid interactive prompt.
 - name: gather facts and check the init system
   hosts:
-    - "{{ mon_group_name | default('mons') }}"
-    - "{{ mds_group_name | default('mdss') }}"
+    - "{{ mon_group_name }}"
+    - "{{ mds_group_name }}"
   become: true
   tasks:
+    - import_role:
+        name: ceph-defaults
+
     - debug:
         msg: gather facts on all Ceph hosts for following reference
+
 
 - name: perform checks, remove mds and print cluster health
   hosts: localhost

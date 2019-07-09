@@ -13,12 +13,16 @@
 
 - name: gather facts and check the init system
   hosts:
-    - "{{ mon_group_name | default('mons') }}"
-    - "{{ mgr_group_name | default('mgrs') }}"
+    - "{{ mon_group_name }}"
+    - "{{ mgr_group_name }}"
   become: true
   tasks:
+    - import_role:
+        name: ceph-defaults
+
     - debug:
         msg: gather facts on all Ceph hosts for following reference
+
 
 - name: confirm if user really meant to remove manager from the ceph cluster
   hosts: localhost

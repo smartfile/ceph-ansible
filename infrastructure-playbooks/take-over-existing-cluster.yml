@@ -19,16 +19,17 @@
     - import_role:
         name: ceph-fetch-keys
 
+
 - hosts:
-  - mons
-  - osds
-  - mdss
-  - rgws
-  - nfss
-  - rbdmirrors
-  - clients
-  - mgrs
-  - iscsi-gw
+  - "{{ mon_group_name }}"
+  - "{{ osd_group_name }}"
+  - "{{ mds_group_name }}"
+  - "{{ rgw_group_name }}"
+  - "{{ nfs_group_name }}"
+  - "{{ rbdmirror_group_name }}"
+  - "{{ client_group_name }}"
+  - "{{ mgr_group_name }}"
+  - "{{ iscsi_gw_group_name }}"
   become: true
   tasks:
     - import_role:
